@@ -15,3 +15,18 @@
 6. Të jetë në gjendje të lexojë përgjigjet që i kthehen nga serveri;<br>
 7. Të dërgojë mesazh serverit si në formë tekstit;<br>
 8. Të ketë qasje të plotë në folderat/ përmbajtjen në server.<br>
+
+
+# Projekti i Komunikimit Klient-Server
+
+Ky program mundëson krijimin e një sistemi të thjeshtë komunikimi mes klientit dhe serverit duke përdorur soket. 
+
+## Funksionalitetet kryesore
+- **Serveri** pret lidhje nga klientët dhe proceson komandat:
+  - `read`: Lexon të dhëna.
+  - `write`: Shkruan të dhëna.
+  - `execute`: Ekzekuton komanda.
+  - `sudo`: Përmirëson të drejtat e përdoruesit.
+- **Klienti** mund të ndërveprojë me serverin bazuar në llojin e aksesit të dhënë:
+  - Vetëm për lexim.
+  - Qasje e plotë.
