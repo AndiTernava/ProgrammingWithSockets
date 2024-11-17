@@ -28,13 +28,14 @@ def handle_socket_error(error_message):
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 def reconnect_to_server():
-    global client_socket  # Ensure we're working with the global client_socket variable
+    global client_socket,client_type  # Ensure we're working with the global variables
     while True:
         try:
             # Recreate the socket if the previous one was closed
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client_socket.connect((SERVER_IP, PORT))
             print(f"{COLOR_PROMPT}Reconnected to the server.")
+            client_type = "read_only"
             initial_msg = client_socket.recv(1024).decode('utf-8')
             print(f"{COLOR_RESPONSE}{initial_msg}")
             if "added to the waiting queue" in initial_msg:
