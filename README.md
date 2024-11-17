@@ -55,10 +55,6 @@ Ky program implementon një sistem komunikimi mes një klienti dhe serveri duke 
 
 ## Mjedisi i Zhvillimit dhe Ekzekutimi i Projektit
 
-Para se të startoni serverin dhe klientin, sigurohuni që keni aktivizuar mjedisin virtual në projektin tuaj.
-- **Në Windows**:
-  ```bash
-  .\venv\Scripts\activate
 Për të ekzekutuar projektin në **PyCharm** ose në **terminal**, ndiqni këto hapa:
 
 ### Hapat për Konfigurimin dhe Ekzekutimin në PyCharm:
