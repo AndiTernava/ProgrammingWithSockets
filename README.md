@@ -1,4 +1,4 @@
-<h1>PërPërshkrimi i projektit të dytë – Rrjetat Kompjuterike</h1>
+<h1>Përshkrimi i projektit të dytë – Rrjetat Kompjuterike</h1>
 <h3>Serveri</h3>
 1. Të vendosen variabla te cilat përmbajnë numrin e portit (numri i portit të jetë i
 çfarëdoshëm) dhe IP adresën (reale);<br>
@@ -20,6 +20,7 @@
 # Projekti i Komunikimit Klient-Server
 
 Ky program mundëson krijimin e një sistemi të thjeshtë komunikimi mes klientit dhe serverit duke përdorur soket. 
+Serveri pret lidhje nga klientët dhe proceson komanda si "read", "write", "execute" dhe "sudo" për përmirësimin e të drejtave të përdoruesit. Klienti mund të ndërveprojë me serverin bazuar në llojin e aksesit të dhënë (vetëm për lexim ose qasje e plotë).
 
 ## Funksionalitetet kryesore
 - **Serveri** pret lidhje nga klientët dhe proceson komandat:
@@ -27,6 +28,4 @@ Ky program mundëson krijimin e një sistemi të thjeshtë komunikimi mes klient
   - `write`: Shkruan të dhëna.
   - `execute`: Ekzekuton komanda.
   - `sudo`: Përmirëson të drejtat e përdoruesit.
-- **Klienti** mund të ndërveprojë me serverin bazuar në llojin e aksesit të dhënë:
-  - Vetëm për lexim.
-  - Qasje e plotë.
+
