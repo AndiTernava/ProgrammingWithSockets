@@ -16,18 +16,18 @@ SERVER_IP = '127.0.0.1'
 PORT = 5557
 MAX_CLIENTS = 1
 TIMEOUT = 300
-DATA_FILE = "data.txt"
+DATA_DIR = "Data"
 CONNECTION_LOG = "connection_log.txt"
 COMMAND_LOG = "command_log.txt"
 PASSWORD = "root"
 
-# Initialize data file if it doesn't exist
-if not os.path.exists(DATA_FILE):
+# Initialize data directory if it doesn't exist
+if not os.path.exists(DATA_DIR):
     try:
-        with open(DATA_FILE, 'w') as file:
-            file.write("Initial Data\n")
-    except Exception as e:
-        print(Fore.RED + f"Error initializing data file: {e}" + Style.RESET_ALL)
+        os.makedirs(DATA_DIR)
+        print(f"Directory '{DATA_DIR}' created successfully.")
+    except OSError as e:
+        print(f"Error creating directory '{DATA_DIR}': {e}")
 
 active_connections = 0
 connection_lock = threading.Lock()
@@ -83,22 +83,61 @@ def handle_client(conn, addr, client_type):
 
                 log_command(client_type, addr, command)
 
-                if command == "read":
+                parts = command.split(" ", 2)
+                if command.startswith("avelable"):
                     try:
-                        with open(DATA_FILE, 'r') as file:
-                            data = file.read()
-                        conn.sendall(f"Data:\n\n{data}".encode('utf-8'))
+                            files = os.listdir(DATA_DIR)
+                            if files:
+                                file_list = "\n".join(files)
+                                conn.sendall(f"Available files:\n{file_list}".encode('utf-8'))
+                            else:
+                                conn.send("No files are available in the directory.".encode('utf-8'))
                     except Exception as e:
-                        conn.send(f"Error reading file: {e}".encode('utf-8'))
+                            conn.send(f"Error listing files: {e}".encode('utf-8'))
 
-                elif command.startswith("write") and client_type == "full_access":
-                    _, new_data = command.split(" ", 1)
+                elif  command.startswith("read"):
+                    # Read specific file
+                    if len(parts) > 1:
+                        file_name = parts[1]
+                        # Ensure the filename ends with .txt
+                        if not file_name.endswith(".txt"):
+                            file_name += ".txt"
+
+                        # Construct a safe path within DATA_DIR
+                        safe_path = os.path.join(DATA_DIR, os.path.basename(file_name))
+                        try:
+                            if os.path.exists(safe_path):
+                                with open(safe_path, 'r') as file:
+                                    data = file.read()
+                                conn.sendall(f"Content of {file_name}:\n\n{data}".encode('utf-8'))
+                            else:
+                                conn.send(f"Error: File {file_name} does not exist.".encode('utf-8'))
+                        except Exception as e:
+                            conn.send(f"Error reading file {file_name}: {e}".encode('utf-8'))
+                    else:
+                        try:
+                            files = os.listdir(DATA_DIR)
+                            if files:
+                                file_list = "\n".join(files)
+                                conn.sendall(f"Available files:\n{file_list}".encode('utf-8'))
+                            else:
+                                conn.send("No files are available in the directory.".encode('utf-8'))
+                        except Exception as e:
+                            conn.send(f"Error listing files: {e}".encode('utf-8'))
+
+                elif  command.startswith("write") and len(parts) > 2 and client_type == "full_access":
+                    # Write to specific file
+                    file_name, new_data = parts[1], parts[2]
+                    if not file_name.endswith(".txt"):
+                            file_name += ".txt"
+
+                    safe_path = os.path.join(DATA_DIR, os.path.basename(file_name))
                     try:
-                        with open(DATA_FILE, 'a') as file:
-                            file.write("\n" + new_data)
-                        conn.send("Data updated successfully.".encode('utf-8'))
+                        with open(safe_path, 'a') as file:
+                            file.write(new_data + "\n")
+                        conn.send(f"Data written to {file_name} successfully.".encode('utf-8'))
                     except Exception as e:
-                        conn.send(f"Error writing to file: {e}".encode('utf-8'))
+                        conn.send(f"Error writing to file {file_name}: {e}".encode('utf-8'))
 
                 elif command.startswith("execute") and client_type == "full_access":
                     _, exec_command = command.split(" ", 1)
