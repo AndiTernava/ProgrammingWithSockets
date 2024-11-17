@@ -153,6 +153,7 @@ def handle_client(conn, addr, client_type):
                     _, password = command.split(" ", 1)
                     if password == PASSWORD:
                         client_type = "full_access"
+                        log_connection(f"[UPGRADED] {addr} upgraded to {client_type}")
                         conn.send("Upgraded to full access.".encode('utf-8'))
                     else:
                         conn.send("Incorrect password.".encode('utf-8'))
