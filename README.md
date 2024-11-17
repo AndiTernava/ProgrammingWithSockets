@@ -1,4 +1,20 @@
-<h1>Përshkrimi i projektit të dytë – Rrjetat Kompjuterike</h1>
+# Universiteti i Prishtinës 'Hasan Prishtina'
+- Fakulteti i Inxhinierisë Elektrike dhe Kompjuterike<br>
+- Departamenti: Inxhinieri Kompjuterike dhe Softuerike<br>
+
+# TCP Socket Programming
+Projekt nga lënda "Rrjeta Kompjuterike".
+
+# Contributors
+- Alisa Shala
+- Admir Rama
+- Andi Tërnava
+
+# Asistenti i lëndës
+Mërgim Hoti
+
+
+<h1>Kërkesat</h1>
 <h3>Serveri</h3>
 1. Të vendosen variabla te cilat përmbajnë numrin e portit (numri i portit të jetë i
 çfarëdoshëm) dhe IP adresën (reale);<br>
