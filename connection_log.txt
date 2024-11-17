@@ -1,0 +1,2 @@
+[2024-11-17 15:55:07] [SERVER SHUTDOWN] Server has been closed.
+[2024-11-17 15:55:31] [SERVER SHUTDOWN] Server has been closed.
