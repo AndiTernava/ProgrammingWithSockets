@@ -100,7 +100,7 @@ try:
             prompt = "Enter command (avlable-to see avelable files to read from,read <file_name>, sudo  to upgrade, exit): "
         elif client_type == "full_access":
             prompt_color = COLOR_FULL_ACCESS
-             prompt = "Enter command (avlable-to see avelable files to read from,read <file_name>, write <new_data>, execute <command>, unsudo to downgrade, exit): "
+            prompt = "Enter command (avlable-to see avelable files to read from,read <file_name>, write <new_data>, execute <command>, unsudo to downgrade, exit): "
 
         # Get user input with the prompt color
         command = input(f"{prompt_color}{prompt}{Style.RESET_ALL}").strip()
