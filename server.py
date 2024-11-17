@@ -8,10 +8,10 @@ import time
 from datetime import datetime, date
 from colorama import Fore, Style, init
 
-# Initialize colorama for colored output
+
 init(autoreset=True)
 
-# Define server IP address, port, max clients, and timeout
+
 SERVER_IP = '127.0.0.1'
 PORT = 5556
 MAX_CLIENTS = 1
